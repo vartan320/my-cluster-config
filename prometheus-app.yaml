@@ -13,6 +13,16 @@ spec:
       values: |
         grafana:
           adminPassword: "your-safe-password"
+        prometheus:
+  prometheusSpec:
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: local-path
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 5Gi
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: monitoring
