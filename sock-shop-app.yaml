@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sock-shop
+  namespace: argocd
+spec:
+  project: default
+  source:
+    # This points to the official microservices-demo repo
+    repoURL: https://github.com/microservices-demo/microservices-demo.git
+    targetRevision: master
+    path: deploy/kubernetes
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: sock-shop
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
