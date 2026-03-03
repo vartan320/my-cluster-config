@@ -13,6 +13,11 @@ spec:
       values: |
         grafana:
           adminPassword: "your-safe-password"
+          sidecar:
+            dashboards:
+              enabled: true
+              label: grafana_dashboard
+              searchNamespace: ALL
         prometheus:
           prometheusSpec:
             storageSpec:
@@ -33,18 +38,3 @@ spec:
     syncOptions:
     - CreateNamespace=true
     - ServerSideApply=true
-spec:
-  source:
-    # ... your existing repoURL and chart info ...
-    helm:
-      values: |
-        grafana:
-          # This sets your permanent password
-          adminPassword: "YourSecretPassword123" 
-          
-          # This tells Grafana to automatically look for Dashboards in ConfigMaps
-          sidecar:
-            dashboards:
-              enabled: true
-              label: grafana_dashboard
-              searchNamespace: ALL
