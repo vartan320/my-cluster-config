@@ -38,3 +38,5 @@ spec:
     syncOptions:
     - CreateNamespace=true
     - ServerSideApply=true
+  repoServer:
+    replicas: 2
