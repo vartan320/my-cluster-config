@@ -18,8 +18,21 @@ spec:
               enabled: true
               label: grafana_dashboard
               searchNamespace: ALL
+          # Robustness Fix: Ensuring Grafana doesn't OOM during the Sock Shop load
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              memory: 256Mi
+
         prometheus:
           prometheusSpec:
+            # Resource Fix: Giving Prometheus enough room to handle 14 microservices
+            resources:
+              requests:
+                memory: 1Gi
+              limits:
+                memory: 4Gi 
             storageSpec:
               volumeClaimTemplate:
                 spec:
@@ -38,5 +51,3 @@ spec:
     syncOptions:
     - CreateNamespace=true
     - ServerSideApply=true
-  repoServer:
-    replicas: 2
